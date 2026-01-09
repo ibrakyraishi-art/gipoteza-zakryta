@@ -53,7 +53,7 @@ export default async function BlogPost({ params }: Props) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <h1 className="text-4xl font-bold mb-4">Статья не найдена</h1>
           <p className="text-gray-400 mb-4">
-            Файл статьи "{params.slug}.mdx" не найден в папке content/blog/
+            Файл статьи {params.slug}.mdx не найден в папке content/blog/
           </p>
           <Link href="/blog" className="text-accent-cyan hover:underline">
             ← Вернуться к списку статей
@@ -174,7 +174,7 @@ export default async function BlogPost({ params }: Props) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <h1 className="text-4xl font-bold mb-4 text-red-400">Ошибка загрузки статьи</h1>
         <p className="text-gray-400 mb-2">
-          Произошла ошибка при загрузке статьи "{params.slug}"
+          Произошла ошибка при загрузке статьи {params.slug}
         </p>
         <pre className="bg-dark-gray p-4 rounded-lg text-sm overflow-auto mb-4">
           {error instanceof Error ? error.message : String(error)}
