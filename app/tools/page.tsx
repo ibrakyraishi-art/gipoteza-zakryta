@@ -17,7 +17,10 @@ export default function ToolsPage() {
         const res = await fetch('/api/posts?type=tools')
         const data = await res.json()
         setTools(data)
-        setFilteredTools(data.filter((t: Post) => t.frontmatter.status === 'active'))
+        const activeTools = data.filter((t: Post) => 
+          t.frontmatter.status === 'active' || !t.frontmatter.status
+        )
+        setFilteredTools(activeTools)
       } catch (error) {
         console.error('Error fetching tools:', error)
       } finally {
