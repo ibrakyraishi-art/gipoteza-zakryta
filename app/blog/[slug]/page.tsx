@@ -32,19 +32,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function BlogPost({ params }: Props) {
-  const post = await getPostBySlug('blog', params.slug)
+  try {
+    const post = await getPostBySlug('blog', params.slug)
 
-  if (!post) {
-    notFound()
-  }
+    if (!post) {
+      return (
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <h1 className="text-4xl font-bold mb-4">Статья не найдена</h1>
+          <p className="text-gray-400 mb-4">
+            Файл статьи "{params.slug}.mdx" не найден в папке content/blog/
+          </p>
+          <Link href="/blog" className="text-accent-cyan hover:underline">
+            ← Вернуться к списку статей
+          </Link>
+        </div>
+      )
+    }
 
-  const mdxSource = await serializeMDX(post.content)
-  const toc = getTableOfContents(post.content)
-  const similarPosts = await getSimilarPosts('blog', params.slug, post.frontmatter.tags, 3)
+    const mdxSource = await serializeMDX(post.content)
+    const toc = getTableOfContents(post.content)
+    const similarPosts = await getSimilarPosts('blog', params.slug, post.frontmatter.tags, 3)
 
-  return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="max-w-4xl mx-auto">
+    return (
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="max-w-4xl mx-auto">
         {/* Breadcrumb */}
         <nav className="mb-8 flex items-center space-x-2 text-sm text-gray-400">
           <Link href="/" className="hover:text-accent-cyan transition-colors">
@@ -143,7 +154,24 @@ export default async function BlogPost({ params }: Props) {
             Вернуться к списку статей
           </Link>
         </div>
+        </div>
       </div>
-    </div>
-  )
+    )
+  } catch (error) {
+    console.error('Error rendering blog post:', error)
+    return (
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h1 className="text-4xl font-bold mb-4 text-red-400">Ошибка загрузки статьи</h1>
+        <p className="text-gray-400 mb-2">
+          Произошла ошибка при загрузке статьи "{params.slug}"
+        </p>
+        <pre className="bg-dark-gray p-4 rounded-lg text-sm overflow-auto mb-4">
+          {error instanceof Error ? error.message : String(error)}
+        </pre>
+        <Link href="/blog" className="text-accent-cyan hover:underline">
+          ← Вернуться к списку статей
+        </Link>
+      </div>
+    )
+  }
 }
