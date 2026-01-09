@@ -8,6 +8,18 @@ interface Props {
   params: { slug: string }
 }
 
+export async function generateStaticParams() {
+  try {
+    const posts = await getAllPosts('blog')
+    return posts.map((post) => ({
+      slug: post.slug,
+    }))
+  } catch (error) {
+    console.error('Error generating static params:', error)
+    return []
+  }
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getPostBySlug('blog', params.slug)
   
