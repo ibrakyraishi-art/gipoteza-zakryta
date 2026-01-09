@@ -9,7 +9,7 @@ export interface Frontmatter {
   date: string
   updatedAt?: string
   tags?: string[]
-  status?: 'published' | 'draft' | 'archived'
+  status?: 'published' | 'draft' | 'archived' | 'active'
   readingTime?: string
   // For tools
   type?: string
