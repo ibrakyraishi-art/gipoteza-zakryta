@@ -1,8 +1,9 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { Metadata } from 'next'
-import { getPostBySlug, getSimilarPosts, getTableOfContents } from '@/lib/content'
-import { serializeMDX, MDXRemote } from '@/lib/mdx'
+import { getPostBySlug, getSimilarPosts, getTableOfContents, getAllPosts } from '@/lib/content'
+import { serializeMDX } from '@/lib/mdx'
+import MDXContent from '@/components/MDXContent'
 
 interface Props {
   params: { slug: string }
@@ -113,9 +114,7 @@ export default async function BlogPost({ params }: Props) {
         </header>
 
         {/* Article Content */}
-        <article className="prose prose-lg max-w-none mb-16">
-          <MDXRemote {...mdxSource} />
-        </article>
+        <MDXContent mdxSource={mdxSource} />
 
         {/* Divider */}
         <div className="border-t border-gray-800 my-12"></div>
