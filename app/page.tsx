@@ -1,8 +1,17 @@
 import Link from 'next/link'
 import { getAllPosts } from '@/lib/content'
 
+export const dynamic = 'force-dynamic'
+
 export default async function Home() {
-  const recentPosts = (await getAllPosts('blog')).slice(0, 3)
+  let recentPosts = []
+  
+  try {
+    const allPosts = await getAllPosts('blog')
+    recentPosts = allPosts.slice(0, 3)
+  } catch (error) {
+    console.error('Error loading posts:', error)
+  }
 
   return (
     <div>
