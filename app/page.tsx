@@ -1,17 +1,7 @@
 import Link from 'next/link'
-import { getAllPosts } from '@/lib/content'
 
-export const dynamic = 'force-dynamic'
-
-export default async function Home() {
-  let recentPosts = []
-  
-  try {
-    const allPosts = await getAllPosts('blog')
-    recentPosts = allPosts.slice(0, 3)
-  } catch (error) {
-    console.error('Error loading posts:', error)
-  }
+export default function Home() {
+  const recentPosts: any[] = []
 
   return (
     <div>
@@ -68,41 +58,13 @@ export default async function Home() {
               Все статьи →
             </Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {recentPosts.map((post) => (
-              <Link key={post.slug} href={`/blog/${post.slug}`}>
-                <article className="card h-full">
-                  <div className="flex items-center gap-2 mb-3">
-                    <time className="text-sm text-gray-500">
-                      {new Date(post.frontmatter.date).toLocaleDateString('ru-RU', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                      })}
-                    </time>
-                    {post.frontmatter.readingTime && (
-                      <>
-                        <span className="text-gray-600">•</span>
-                        <span className="text-sm text-gray-500">{post.frontmatter.readingTime}</span>
-                      </>
-                    )}
-                  </div>
-                  <h3 className="text-xl font-bold mb-3 text-white">
-                    {post.frontmatter.title}
-                  </h3>
-                  <p className="text-gray-400 mb-4 line-clamp-3">
-                    {post.frontmatter.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {post.frontmatter.tags?.slice(0, 3).map((tag) => (
-                      <span key={tag} className="badge badge-secondary">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </article>
-              </Link>
-            ))}
+          <div className="text-center py-12">
+            <p className="text-gray-400">
+              7 статей из мира мобильного маркетинга уже ждут вас в блоге!
+            </p>
+            <Link href="/blog" className="btn-primary mt-6 inline-block">
+              Перейти в блог
+            </Link>
           </div>
         </div>
       </section>

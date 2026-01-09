@@ -27,16 +27,16 @@ export interface Post {
   content: string
 }
 
-const contentDirectory = path.join(process.cwd(), 'content')
-
 export function getContentDirectory(type: 'blog' | 'publications' | 'tools') {
-  return path.join(contentDirectory, type)
+  return path.join(process.cwd(), 'content', type)
 }
 
 export async function getAllPosts(type: 'blog' | 'publications' | 'tools'): Promise<Post[]> {
   const dir = getContentDirectory(type)
   
   if (!fs.existsSync(dir)) {
+    console.error(`Directory not found: ${dir}`)
+    console.error(`Current directory: ${process.cwd()}`)
     return []
   }
 
@@ -79,6 +79,9 @@ export async function getPostBySlug(
     const fullPath = path.join(dir, `${slug}.mdx`)
     
     if (!fs.existsSync(fullPath)) {
+      console.error(`File not found: ${fullPath}`)
+      console.error(`Directory: ${dir}`)
+      console.error(`Current directory: ${process.cwd()}`)
       return null
     }
 
