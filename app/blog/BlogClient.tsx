@@ -36,9 +36,9 @@ export default function BlogClient({ posts, tags }: Props) {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* Header */}
-      <div className="mb-12">
-        <h1 className="mb-4">Блог</h1>
-        <p className="text-xl text-gray-400">
+      <div className="mb-8 md:mb-12 text-center md:text-left">
+        <h1 className="mb-4 text-3xl md:text-5xl">Блог</h1>
+        <p className="text-lg md:text-xl text-gray-400">
           Статьи о мобильном маркетинге, атрибуции и оптимизации кампаний
         </p>
       </div>
@@ -73,9 +73,9 @@ export default function BlogClient({ posts, tags }: Props) {
         <div className="flex flex-wrap gap-2">
           <button
             onClick={() => setSelectedTag('')}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+            className={`px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm font-medium transition-all ${
               selectedTag === ''
-                ? 'bg-accent-cyan text-deep-black'
+                ? 'bg-accent-cyan text-deep-black shadow-lg shadow-accent-cyan/30'
                 : 'bg-dark-gray text-gray-300 hover:bg-gray-800'
             }`}
           >
@@ -85,9 +85,9 @@ export default function BlogClient({ posts, tags }: Props) {
             <button
               key={tag}
               onClick={() => setSelectedTag(tag)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+              className={`px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm font-medium transition-all ${
                 selectedTag === tag
-                  ? 'bg-accent-cyan text-deep-black'
+                  ? 'bg-accent-cyan text-deep-black shadow-lg shadow-accent-cyan/30'
                   : 'bg-dark-gray text-gray-300 hover:bg-gray-800'
               }`}
             >
@@ -104,37 +104,47 @@ export default function BlogClient({ posts, tags }: Props) {
 
       {/* Posts Grid */}
       {filteredPosts.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredPosts.map((post) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {filteredPosts.map((post, index) => (
             <Link key={post.slug} href={`/blog/${post.slug}`}>
-              <article className="card h-full">
-                <div className="flex items-center gap-2 mb-3">
-                  <time className="text-sm text-gray-500">
-                    {new Date(post.frontmatter.date).toLocaleDateString('ru-RU', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })}
-                  </time>
-                  {post.frontmatter.readingTime && (
-                    <>
-                      <span className="text-gray-600">•</span>
-                      <span className="text-sm text-gray-500">{post.frontmatter.readingTime}</span>
-                    </>
-                  )}
-                </div>
-                <h3 className="text-xl font-bold mb-3 text-white">
-                  {post.frontmatter.title}
-                </h3>
-                <p className="text-gray-400 mb-4 line-clamp-3">
-                  {post.frontmatter.description}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {post.frontmatter.tags?.slice(0, 3).map((tag) => (
-                    <span key={tag} className="badge badge-secondary">
-                      {tag}
-                    </span>
-                  ))}
+              <article 
+                className="card h-full hover-glow-pulse group relative overflow-hidden"
+                style={{
+                  animation: `slide-in-up 0.6s ease-out ${index * 0.1}s both`
+                }}
+              >
+                {/* Gradient overlay on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-accent-cyan/0 to-accent-cyan/0 group-hover:from-accent-cyan/5 group-hover:to-transparent transition-all duration-300 pointer-events-none"></div>
+                
+                <div className="relative z-10">
+                  <div className="flex items-center gap-2 mb-3 text-xs md:text-sm">
+                    <time className="text-gray-500">
+                      {new Date(post.frontmatter.date).toLocaleDateString('ru-RU', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })}
+                    </time>
+                    {post.frontmatter.readingTime && (
+                      <>
+                        <span className="text-gray-600">•</span>
+                        <span className="text-gray-500">{post.frontmatter.readingTime}</span>
+                      </>
+                    )}
+                  </div>
+                  <h3 className="text-lg md:text-xl font-bold mb-3 text-white group-hover:text-accent-cyan transition-colors">
+                    {post.frontmatter.title}
+                  </h3>
+                  <p className="text-gray-400 mb-4 line-clamp-3 text-sm md:text-base">
+                    {post.frontmatter.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {post.frontmatter.tags?.slice(0, 3).map((tag) => (
+                      <span key={tag} className="badge badge-secondary text-xs">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </article>
             </Link>
@@ -142,6 +152,7 @@ export default function BlogClient({ posts, tags }: Props) {
         </div>
       ) : (
         <div className="text-center py-12">
+          <div className="text-6xl mb-4">🔍</div>
           <p className="text-gray-400 text-lg">
             По вашему запросу ничего не найдено. Попробуйте изменить фильтры.
           </p>

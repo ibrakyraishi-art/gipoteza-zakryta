@@ -9,6 +9,7 @@ const navigation = [
   { name: 'Блог', href: '/blog' },
   { name: 'Публикации', href: '/publications' },
   { name: 'Инструменты', href: '/tools' },
+  { name: '🎮 Игра', href: '/interactive' },
   { name: 'О проекте', href: '/about' },
 ]
 
@@ -22,8 +23,11 @@ export default function Header() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 bg-accent-cyan/20 rounded-lg flex items-center justify-center border border-accent-cyan/30 group-hover:border-accent-cyan transition-all">
-              <span className="text-accent-cyan font-bold text-xl">Г</span>
+            <div className="relative w-10 h-10 transition-all duration-300 group-hover:scale-110">
+              <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+                <circle cx="100" cy="100" r="95" stroke="#00d9ff" strokeWidth="10" fill="none" className="transition-all group-hover:stroke-accent-cyan-dark"/>
+                <path d="M50 100 L85 135 L150 70" stroke="#ffffff" strokeWidth="16" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+              </svg>
             </div>
             <span className="text-lg font-bold text-gradient-accent hidden sm:block">
               Гипотеза закрыта

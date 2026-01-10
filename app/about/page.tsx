@@ -1,20 +1,53 @@
 export default function AboutPage() {
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h1 className="mb-8">О проекте</h1>
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <h1 className="mb-12 text-center">О проекте</h1>
       
       <div className="space-y-8">
-        <section className="card">
-          <h2 className="text-2xl font-bold mb-4">Привет!</h2>
-          <div className="prose prose-lg">
-            <p>
-              Меня зовут <span className="text-accent-cyan font-semibold">Ибрагим</span>, мне 22 года.
-            </p>
-            <p>
-              Я работаю в мобайле: запускал и web, и app-направления, крутил кампании в SRN 
-              (Google, Facebook, TikTok), Яндексе, DSP и SSP. Разбираюсь в атрибуции трекеров 
-              (AppsFlyer, Adjust, AppMetrica) и знаю, как это влияет на результат.
-            </p>
+        {/* Hero section with photo */}
+        <section className="card relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-accent-cyan/5 rounded-full blur-3xl"></div>
+          
+          <div className="grid md:grid-cols-5 gap-8 items-center relative">
+            {/* Photo */}
+            <div className="md:col-span-2 flex justify-center">
+              <div className="relative group">
+                <div className="absolute -inset-1 bg-gradient-to-r from-accent-cyan to-accent-cyan-dark rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-300"></div>
+                <div className="relative w-64 h-80 rounded-2xl overflow-hidden border-2 border-accent-cyan/40 group-hover:border-accent-cyan transition-all duration-300 shadow-2xl">
+                  <img 
+                    src="/brand/profile.jpg" 
+                    alt="Ибрагим" 
+                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      if (target.nextElementSibling) {
+                        (target.nextElementSibling as HTMLElement).style.display = 'flex';
+                      }
+                    }}
+                  />
+                  <div className="hidden absolute inset-0 bg-gradient-to-br from-accent-cyan/20 to-dark-gray items-center justify-center flex-col gap-4">
+                    <div className="text-7xl">👨‍💻</div>
+                    <p className="text-accent-cyan font-bold text-lg">Ибрагим</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Text */}
+            <div className="md:col-span-3">
+              <h2 className="text-3xl font-bold mb-4">Привет! 👋</h2>
+              <div className="prose prose-lg">
+                <p className="text-xl mb-4">
+                  Меня зовут <span className="text-accent-cyan font-bold text-2xl">Ибрагим</span>, мне 22 года.
+                </p>
+                <p className="text-gray-300">
+                  Я работаю в мобайле: запускал и web, и app-направления, крутил кампании в SRN 
+                  (Google, Facebook, TikTok), Яндексе, DSP и SSP. Разбираюсь в атрибуции трекеров 
+                  (AppsFlyer, Adjust, AppMetrica) и знаю, как это влияет на результат.
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -54,7 +87,7 @@ export default function AboutPage() {
             </p>
             <div className="mt-6">
               <a
-                href="https://t.me/gipoteza_zakryta"
+                href="https://t.me/closedhypothesis"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary inline-flex items-center gap-2"
