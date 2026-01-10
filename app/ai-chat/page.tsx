@@ -107,7 +107,7 @@ export default function AIPage() {
             Задайте вопрос по мобильному маркетингу
           </p>
           <p className="text-sm text-gray-500 mt-2">
-            Работает на <span className="text-accent-cyan">Qwen3 (32B)</span> через Groq 🚀
+            Работает на <span className="text-accent-cyan">Llama 3.3 (70B)</span> через Groq 🚀
           </p>
         </div>
 
@@ -254,8 +254,8 @@ export default function AIPage() {
           </div>
           <div className="card text-center">
             <div className="text-accent-cyan text-2xl mb-2">🧠</div>
-            <p className="text-sm text-gray-400">Qwen3 (32B)</p>
-            <p className="text-xs text-gray-500 mt-1">От Alibaba Cloud</p>
+            <p className="text-sm text-gray-400">Llama 3.3 (70B)</p>
+            <p className="text-xs text-gray-500 mt-1">От Meta (новейшая)</p>
           </div>
           <div className="card text-center">
             <div className="text-accent-cyan text-2xl mb-2">💰</div>

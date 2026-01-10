@@ -51,7 +51,7 @@ export async function POST(request: Request) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'qwen/qwen3-32b', // Qwen3-32B от Alibaba Cloud
+        model: 'llama-3.3-70b-versatile', // Llama 3.3 70B - самая мощная модель
         messages: messages,
         temperature: 0.7,
         max_tokens: 2048,
