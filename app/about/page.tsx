@@ -1,6 +1,10 @@
-import Image from 'next/image'
+'use client'
+
+import { useState } from 'react'
+import Link from 'next/link'
 
 export default function AboutPage() {
+  const [imageError, setImageError] = useState(false)
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <h1 className="mb-12 text-center">О проекте</h1>
@@ -16,25 +20,19 @@ export default function AboutPage() {
               <div className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-accent-cyan to-accent-cyan-dark rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-300"></div>
                   <div className="relative w-64 h-80 rounded-2xl overflow-hidden border-2 border-accent-cyan/40 group-hover:border-accent-cyan transition-all duration-300 shadow-2xl">
-                    <div className="relative w-full h-full">
-                      <Image 
+                    {!imageError ? (
+                      <img 
                         src="/brand/profile.jpg" 
                         alt="Ибрагим" 
-                        fill
-                        className="object-cover grayscale hover:grayscale-0 transition-all duration-500"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.style.display = 'none';
-                          if (target.parentElement?.nextElementSibling) {
-                            (target.parentElement.nextElementSibling as HTMLElement).style.display = 'flex';
-                          }
-                        }}
+                        className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                        onError={() => setImageError(true)}
                       />
-                    </div>
-                    <div className="hidden absolute inset-0 bg-gradient-to-br from-accent-cyan/20 to-dark-gray items-center justify-center flex-col gap-4">
-                      <div className="text-7xl">👨‍💻</div>
-                      <p className="text-accent-cyan font-bold text-lg">Ибрагим</p>
-                    </div>
+                    ) : (
+                      <div className="absolute inset-0 bg-gradient-to-br from-accent-cyan/20 to-dark-gray flex items-center justify-center flex-col gap-4">
+                        <div className="text-7xl">👨‍💻</div>
+                        <p className="text-accent-cyan font-bold text-lg">Ибрагим</p>
+                      </div>
+                    )}
                   </div>
               </div>
             </div>
