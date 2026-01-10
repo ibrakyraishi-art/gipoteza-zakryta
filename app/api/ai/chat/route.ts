@@ -51,7 +51,7 @@ export async function POST(request: Request) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'qwen2-72b-instruct', // Используем Qwen 2.5 72B
+        model: 'llama-3.1-70b-versatile', // Llama 3.1 70B - быстрая и умная модель
         messages: messages,
         temperature: 0.7,
         max_tokens: 2048,
