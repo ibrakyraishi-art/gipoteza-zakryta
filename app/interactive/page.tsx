@@ -205,7 +205,7 @@ export default function InteractivePage() {
           <ul className="space-y-2 text-gray-300">
             <li className="flex items-start gap-3">
               <span className="text-accent-cyan text-xl">🎯</span>
-              <span>Нажмите "Начать игру" чтобы запустить таймер</span>
+              <span>Нажмите &quot;Начать игру&quot; чтобы запустить таймер</span>
             </li>
             <li className="flex items-start gap-3">
               <span className="text-accent-cyan text-xl">👆</span>

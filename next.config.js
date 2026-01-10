@@ -4,6 +4,9 @@ const nextConfig = {
   experimental: {
     mdxRs: false,
   },
+  images: {
+    unoptimized: true,
+  },
 }
 
 module.exports = nextConfig

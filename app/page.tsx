@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Home() {
   const recentPosts: any[] = []
@@ -57,19 +58,22 @@ export default function Home() {
                 <div className="relative group">
                   <div className="absolute -inset-1 bg-gradient-to-r from-accent-cyan to-accent-cyan-dark rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-300"></div>
                   <div className="relative w-64 h-80 md:w-80 md:h-96 rounded-2xl overflow-hidden border-2 border-accent-cyan/30 group-hover:border-accent-cyan/60 transition-all duration-300">
-                    <img 
-                      src="/brand/profile.jpg" 
-                      alt="Ибрагим" 
-                      className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
-                      onError={(e) => {
-                        // Fallback to placeholder if image not found
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        if (target.nextElementSibling) {
-                          (target.nextElementSibling as HTMLElement).style.display = 'flex';
-                        }
-                      }}
-                    />
+                    <div className="relative w-full h-full">
+                      <Image 
+                        src="/brand/profile.jpg" 
+                        alt="Ибрагим"
+                        fill
+                        className="object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                        onError={(e) => {
+                          // Fallback to placeholder if image not found
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                          if (target.parentElement?.nextElementSibling) {
+                            (target.parentElement.nextElementSibling as HTMLElement).style.display = 'flex';
+                          }
+                        }}
+                      />
+                    </div>
                     <div className="hidden absolute inset-0 bg-gradient-to-br from-accent-cyan/20 to-dark-gray items-center justify-center">
                       <div className="text-6xl">👨‍💻</div>
                     </div>
