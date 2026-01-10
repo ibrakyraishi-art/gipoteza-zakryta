@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
 interface Consultation {
@@ -17,8 +18,19 @@ export default function AdminConsultationsPage() {
   const [consultations, setConsultations] = useState<Consultation[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const router = useRouter()
 
   useEffect(() => {
+    // Проверяем авторизацию
+    const token = localStorage.getItem('admin_token')
+    if (!token) {
+      // Перенаправляем на страницу логина
+      router.push('/admin/login')
+      return
+    }
+    
+    setIsAuthenticated(true)
     fetchConsultations()
   }, [])
 
@@ -50,7 +62,13 @@ export default function AdminConsultationsPage() {
     })
   }
 
-  if (loading) {
+  const handleLogout = () => {
+    localStorage.removeItem('admin_token')
+    router.push('/admin/login')
+  }
+
+  // Показываем загрузку пока проверяем авторизацию
+  if (!isAuthenticated || loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -72,13 +90,21 @@ export default function AdminConsultationsPage() {
         </div>
 
         {/* Заголовок */}
-        <div className="mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">
-            Админ-панель: Заявки на консультацию
-          </h1>
-          <p className="text-gray-400">
-            Всего заявок: <span className="text-accent-cyan font-bold">{consultations.length}</span>
-          </p>
+        <div className="mb-12 flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+          <div>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">
+              Админ-панель: Заявки на консультацию
+            </h1>
+            <p className="text-gray-400">
+              Всего заявок: <span className="text-accent-cyan font-bold">{consultations.length}</span>
+            </p>
+          </div>
+          <button
+            onClick={handleLogout}
+            className="btn-primary px-6 py-2 text-sm whitespace-nowrap"
+          >
+            🔒 Выйти
+          </button>
         </div>
 
         {/* Ошибка */}
