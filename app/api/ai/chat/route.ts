@@ -51,7 +51,7 @@ export async function POST(request: Request) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'llama-3.3-70b-versatile', // Llama 3.3 70B - самая новая и стабильная модель Groq
+        model: 'llama3-groq-70b-8192-tool-use-preview', // Llama 3 Groq 70B - оптимизированная версия для Groq
         messages: messages,
         temperature: 0.7,
         max_tokens: 2048,
