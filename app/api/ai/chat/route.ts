@@ -51,7 +51,7 @@ export async function POST(request: Request) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'llama-3.1-70b-versatile', // Llama 3.1 70B - быстрая и умная модель
+        model: 'mixtral-8x7b-32768', // Mixtral 8x7B - проверенная рабочая модель
         messages: messages,
         temperature: 0.7,
         max_tokens: 2048,
