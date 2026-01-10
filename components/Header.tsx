@@ -9,6 +9,7 @@ const navigation = [
   { name: 'Блог', href: '/blog' },
   { name: 'Публикации', href: '/publications' },
   { name: 'Инструменты', href: '/tools' },
+  { name: '🤖 AI-Чат', href: '/ai-chat' },
   { name: '🎮 Игра', href: '/interactive' },
   { name: 'О проекте', href: '/about' },
   { name: '💬 Консультация', href: '/consultation' },

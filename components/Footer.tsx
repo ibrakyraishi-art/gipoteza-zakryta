@@ -56,6 +56,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/ai-chat" className="text-gray-400 hover:text-accent-cyan transition-colors">
+                  🤖 AI-Чат
+                </Link>
+              </li>
+              <li>
                 <Link href="/about" className="text-gray-400 hover:text-accent-cyan transition-colors">
                   О проекте
                 </Link>
