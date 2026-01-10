@@ -11,6 +11,7 @@ const navigation = [
   { name: 'Инструменты', href: '/tools' },
   { name: '🎮 Игра', href: '/interactive' },
   { name: 'О проекте', href: '/about' },
+  { name: '💬 Консультация', href: '/consultation' },
 ]
 
 export default function Header() {

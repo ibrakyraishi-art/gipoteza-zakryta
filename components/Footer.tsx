@@ -60,6 +60,11 @@ export default function Footer() {
                   О проекте
                 </Link>
               </li>
+              <li>
+                <Link href="/consultation" className="text-gray-400 hover:text-accent-cyan transition-colors">
+                  💬 Консультация
+                </Link>
+              </li>
             </ul>
           </div>
 
