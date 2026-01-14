@@ -16,142 +16,136 @@ export default function YangoBridgePage() {
     const utmContent = searchParams.get('utm_content') || ''
     const gclid = searchParams.get('gclid') || ''
 
-    // Базовая ссылка AppsFlyer OneLink (ЗАМЕНИ на свою реальную ссылку)
+    // Базовая ссылка AppsFlyer OneLink
     const oneLinkBase = 'https://yango.onelink.me/XXXXX'
 
     // Преобразуем UTM → AppsFlyer параметры
     const params = new URLSearchParams()
 
-    // Основные параметры AppsFlyer
-    if (utmSource) params.append('pid', utmSource) // Media source (обычно google_ads)
-    if (utmCampaign) params.append('c', utmCampaign) // Campaign name
-    if (utmTerm) params.append('af_keywords', utmTerm) // Keywords
-    if (utmContent) params.append('af_adset', utmContent) // AdGroup
-    if (gclid) params.append('af_ad', gclid) // Google Click ID
-    if (utmMedium) params.append('af_channel', utmMedium) // Channel (cpc, display, etc)
+    if (utmSource) params.append('pid', utmSource)
+    if (utmCampaign) params.append('c', utmCampaign)
+    if (utmTerm) params.append('af_keywords', utmTerm)
+    if (utmContent) params.append('af_adset', utmContent)
+    if (gclid) params.append('af_ad', gclid)
+    if (utmMedium) params.append('af_channel', utmMedium)
 
-    // Дополнительные параметры для детальной атрибуции
-    params.append('deep_link_value', 'home') // Куда открыть в приложении
-    params.append('af_force_deeplink', 'true') // Форсировать deeplink
+    params.append('deep_link_value', 'home')
+    params.append('af_force_deeplink', 'true')
 
-    // Собираем итоговую ссылку
     const finalLink = `${oneLinkBase}?${params.toString()}`
     setAppsflyerLink(finalLink)
-
-    // Логируем для отладки (можно удалить в продакшене)
-    console.log('Original UTM params:', {
-      utmSource,
-      utmMedium,
-      utmCampaign,
-      utmTerm,
-      utmContent,
-      gclid,
-    })
-    console.log('Generated AppsFlyer link:', finalLink)
   }, [searchParams])
 
   const handleOpenApp = () => {
-    // Открываем приложение с параметрами
     window.location.href = appsflyerLink
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 text-white overflow-hidden relative">
-      {/* Animated background */}
+    <div className="min-h-screen bg-[#0A0E27] text-white overflow-hidden relative">
+      {/* Background gradient blobs */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob top-0 -left-20"></div>
-        <div className="absolute w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000 top-0 right-0"></div>
-        <div className="absolute w-96 h-96 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000 bottom-0 left-1/2"></div>
+        <div className="absolute w-[600px] h-[600px] bg-purple-600/20 rounded-full blur-3xl -top-40 -left-40 animate-pulse-slow"></div>
+        <div className="absolute w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-3xl top-20 right-0 animate-pulse-slow animation-delay-2000"></div>
+        <div className="absolute w-[400px] h-[400px] bg-pink-600/20 rounded-full blur-3xl bottom-0 left-1/3 animate-pulse-slow animation-delay-4000"></div>
       </div>
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 py-12">
         {/* Logo */}
         <div className="mb-8 animate-fade-in">
-          <div className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent animate-glow">
-            Yango Play
+          <h1 className="text-5xl md:text-7xl font-black tracking-tight">
+            YANGO PLAY
+          </h1>
+        </div>
+
+        {/* Main Headline */}
+        <div className="text-center mb-12 animate-slide-up">
+          <h2 className="text-4xl md:text-6xl font-black leading-tight mb-4">
+            FREE 60 DAYS
+            <br />
+            <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+              OF THE BEST SERIES
+            </span>
+          </h2>
+        </div>
+
+        {/* Phone mockup with glowing border */}
+        <div className="relative mb-12 animate-slide-up animation-delay-200">
+          {/* Glowing gradient border */}
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-500 via-pink-500 to-blue-500 rounded-[3rem] blur-2xl opacity-60 animate-glow-pulse"></div>
+          
+          {/* Phone container */}
+          <div className="relative bg-gradient-to-br from-purple-600 via-pink-600 to-blue-600 p-1 rounded-[3rem]">
+            <div className="bg-black rounded-[2.8rem] overflow-hidden w-[280px] h-[580px] md:w-[320px] md:h-[640px]">
+              {/* Status bar */}
+              <div className="flex items-center justify-between px-6 pt-3 pb-2">
+                <div className="text-xs font-semibold">05:07</div>
+                <div className="flex items-center gap-1">
+                  <div className="w-4 h-3 border border-white rounded-sm"></div>
+                  <div className="text-xs">📶</div>
+                  <div className="text-xs">📡</div>
+                  <div className="text-xs">🔋</div>
+                </div>
+              </div>
+
+              {/* Content area - series poster */}
+              <div className="relative w-full h-full bg-gradient-to-b from-gray-900 to-black px-4 pb-20">
+                {/* Placeholder for series image */}
+                <div className="w-full h-[320px] bg-gradient-to-br from-amber-900 via-amber-800 to-amber-950 rounded-2xl mb-4 flex items-center justify-center overflow-hidden relative">
+                  {/* Mock series poster */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-center">
+                      <div className="text-6xl mb-4">🎭</div>
+                      <div className="text-2xl font-bold text-amber-100 arabic-text mb-2">بضع ساعات في يوم ما</div>
+                      <div className="text-sm text-amber-200/80">Arabic Drama Series</div>
+                    </div>
+                  </div>
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                </div>
+
+                {/* Series dots indicator */}
+                <div className="flex justify-center gap-2 mb-4">
+                  <div className="w-2 h-2 rounded-full bg-gray-600"></div>
+                  <div className="w-2 h-2 rounded-full bg-gray-600"></div>
+                  <div className="w-2 h-2 rounded-full bg-purple-500"></div>
+                  <div className="w-2 h-2 rounded-full bg-gray-600"></div>
+                  <div className="w-2 h-2 rounded-full bg-gray-600"></div>
+                </div>
+
+                {/* Description */}
+                <p className="text-xs text-center text-gray-300 leading-relaxed mb-4">
+                  In just a few hours love ignites, secrets unravel and lives change forever. Yassin and Sara stumble through awkward, charming moments...
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Tagline */}
-        <h1 className="text-3xl md:text-5xl font-bold text-center mb-6 animate-slide-up max-w-4xl">
-          Watch. Listen. Play.
-          <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-blue-300">
-            All in One
-          </span>
-        </h1>
-
-        {/* Description */}
-        <p className="text-lg md:text-xl text-gray-300 text-center mb-12 max-w-2xl animate-slide-up animation-delay-200">
-          Огромная библиотека контента ждёт тебя — полные сезоны, эксклюзивные фильмы, аниме, музыка и многое другое
-        </p>
-
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-5xl w-full animate-slide-up animation-delay-400">
-          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50">
-            <div className="text-4xl mb-4">🎬</div>
-            <h3 className="text-xl font-bold mb-2">Фильмы и сериалы</h3>
-            <p className="text-gray-300 text-sm">Тысячи фильмов и сериалов в HD качестве</p>
-          </div>
-
-          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/50">
-            <div className="text-4xl mb-4">🎵</div>
-            <h3 className="text-xl font-bold mb-2">Музыка</h3>
-            <p className="text-gray-300 text-sm">Миллионы треков и плейлистов для тебя</p>
-          </div>
-
-          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/50">
-            <div className="text-4xl mb-4">🎮</div>
-            <h3 className="text-xl font-bold mb-2">Игры</h3>
-            <p className="text-gray-300 text-sm">Играй в любимые игры прямо в приложении</p>
-          </div>
-        </div>
-
-        {/* Main CTA Button */}
+        {/* CTA Button */}
         <button
           onClick={handleOpenApp}
-          className="group relative px-12 py-6 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full text-white text-xl md:text-2xl font-bold hover:shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 hover:scale-110 animate-pulse-slow"
+          className="group relative px-16 py-5 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 rounded-full text-white text-xl md:text-2xl font-bold hover:shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 hover:scale-105 animate-slide-up animation-delay-400"
         >
-          <span className="relative z-10">🚀 Открыть Yango Play</span>
-          <div className="absolute inset-0 bg-gradient-to-r from-pink-600 to-purple-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <span className="relative z-10">Download App</span>
+          <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
         </button>
 
-        {/* Additional Info */}
-        <div className="mt-8 text-center text-gray-400 text-sm max-w-md">
-          <p>
-            🔒 Безопасный переход в приложение
-            <br />
-            📊 Отслеживание через AppsFlyer
-          </p>
-        </div>
-
-        {/* Debug Info (удали в продакшене) */}
-        {appsflyerLink && (
-          <div className="mt-8 p-4 bg-black/30 rounded-lg text-xs font-mono max-w-4xl w-full overflow-x-auto">
-            <p className="text-gray-400 mb-2">🔗 Сгенерированная ссылка:</p>
-            <p className="text-green-400 break-all">{appsflyerLink}</p>
-          </div>
-        )}
+        {/* Fine print */}
+        <p className="mt-6 text-xs text-gray-500 max-w-md text-center animate-fade-in animation-delay-600">
+          60 days on Yango Plus subscription from first login. Cancel anytime. Terms apply.
+        </p>
       </div>
 
       {/* Styles */}
       <style jsx>{`
-        @keyframes blob {
-          0%,
-          100% {
-            transform: translate(0px, 0px) scale(1);
-          }
-          33% {
-            transform: translate(30px, -50px) scale(1.1);
-          }
-          66% {
-            transform: translate(-20px, 20px) scale(0.9);
-          }
+        @keyframes pulse-slow {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.6; }
         }
 
-        .animate-blob {
-          animation: blob 7s infinite;
+        .animate-pulse-slow {
+          animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
 
         .animation-delay-2000 {
@@ -163,12 +157,8 @@ export default function YangoBridgePage() {
         }
 
         @keyframes fade-in {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
+          from { opacity: 0; }
+          to { opacity: 1; }
         }
 
         .animate-fade-in {
@@ -178,7 +168,7 @@ export default function YangoBridgePage() {
         @keyframes slide-up {
           from {
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(30px);
           }
           to {
             opacity: 1;
@@ -188,48 +178,39 @@ export default function YangoBridgePage() {
 
         .animate-slide-up {
           animation: slide-up 0.8s ease-out;
+          animation-fill-mode: both;
         }
 
         .animation-delay-200 {
           animation-delay: 0.2s;
-          opacity: 0;
-          animation-fill-mode: forwards;
         }
 
         .animation-delay-400 {
           animation-delay: 0.4s;
-          opacity: 0;
-          animation-fill-mode: forwards;
         }
 
-        @keyframes pulse-slow {
-          0%,
-          100% {
-            opacity: 1;
+        .animation-delay-600 {
+          animation-delay: 0.6s;
+        }
+
+        @keyframes glow-pulse {
+          0%, 100% {
+            opacity: 0.6;
+            transform: scale(1);
           }
           50% {
-            opacity: 0.85;
+            opacity: 0.8;
+            transform: scale(1.05);
           }
         }
 
-        .animate-pulse-slow {
-          animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        .animate-glow-pulse {
+          animation: glow-pulse 3s ease-in-out infinite;
         }
 
-        @keyframes glow {
-          0%,
-          100% {
-            text-shadow: 0 0 20px rgba(168, 85, 247, 0.5),
-              0 0 40px rgba(168, 85, 247, 0.3);
-          }
-          50% {
-            text-shadow: 0 0 30px rgba(168, 85, 247, 0.8),
-              0 0 60px rgba(168, 85, 247, 0.5);
-          }
-        }
-
-        .animate-glow {
-          animation: glow 2s ease-in-out infinite;
+        .arabic-text {
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          direction: rtl;
         }
       `}</style>
     </div>
